@@ -19,4 +19,6 @@ module "compute" {
   instance_type = "${var.instance_type}"
   security_group = "${module.networking.sg}" 
   subnets = "${module.networking.subnets}"
+  key_name = "${var.key_name}"
+  public_key_path = "${var.public_key_path}"
 }

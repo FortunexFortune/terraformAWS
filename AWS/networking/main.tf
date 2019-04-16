@@ -62,7 +62,6 @@ resource "aws_security_group" "security_group" {
   vpc_id      = "${aws_vpc.main.id}"
 
   #SSH
-
   ingress {
     from_port   = 22
     to_port     = 22
@@ -71,13 +70,21 @@ resource "aws_security_group" "security_group" {
   }
 
   #HTTP
-
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["${var.accessip}"]
   }
+
+    #HTTP
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["${var.accessip}"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
