@@ -3,12 +3,12 @@ data "aws_availability_zones" "available" {}
 
 # Creating VPC
 resource "aws_vpc" "main" {
-  cidr_block = "${var.vpc_cidr}"
+  cidr_block           = "${var.vpc_cidr}"
   enable_dns_hostnames = true
   enable_dns_support   = true
 
   tags {
-      Name = "main"
+    Name = "main"
   }
 }
 
@@ -48,13 +48,11 @@ resource "aws_subnet" "subnet" {
   }
 }
 
-
 resource "aws_route_table_association" "route_table_assoc" {
   count          = "${aws_subnet.subnet.count}"
   subnet_id      = "${aws_subnet.subnet.*.id[count.index]}"
   route_table_id = "${aws_route_table.route_table.id}"
 }
-
 
 resource "aws_security_group" "security_group" {
   name        = "security_group"
@@ -77,7 +75,7 @@ resource "aws_security_group" "security_group" {
     cidr_blocks = ["${var.accessip}"]
   }
 
-    #HTTP
+  #HTTP
   ingress {
     from_port   = 3000
     to_port     = 3000
@@ -92,7 +90,7 @@ resource "aws_security_group" "security_group" {
     cidr_blocks = ["${var.accessip}"]
   }
 
-    tags = {
+  tags = {
     Name = "Main"
   }
 }

@@ -1,9 +1,9 @@
 #! /bin/bash
 
-#nginx install
-# sudo yum update -y
-# sudo yum install -y nginx
-# sudo service nginx start
+nginx install
+sudo yum update -y
+sudo yum install -y nginx
+sudo service nginx start
 
 #docker install
 sudo yum install -y docker

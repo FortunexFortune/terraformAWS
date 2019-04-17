@@ -4,7 +4,6 @@ data "aws_ami" "server_ami" {
   most_recent = true
   owners      = ["amazon"]
 
-
   filter {
     name   = "owner-alias"
     values = ["amazon"]
@@ -16,18 +15,18 @@ data "aws_ami" "server_ami" {
   }
 }
 
-
 resource "aws_instance" "web" {
-  count         = "${var.instance_count}"
-  ami           = "${data.aws_ami.server_ami.id}"
-  instance_type = "${var.instance_type}"
+  count                  = "${var.instance_count}"
+  ami                    = "${data.aws_ami.server_ami.id}"
+  instance_type          = "${var.instance_type}"
   vpc_security_group_ids = ["${var.security_group}"]
   subnet_id              = "${element(var.subnets, count.index)}"
+
   tags = {
     Name = "Main-${count.index + 1}"
   }
 
-  key_name = "${aws_key_pair.tf_auth.id}"
+  key_name  = "${aws_key_pair.tf_auth.id}"
   user_data = "${data.template_file.user-init.rendered}"
 }
 

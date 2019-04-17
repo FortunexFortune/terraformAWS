@@ -1,0 +1,2 @@
+#Variables Storage
+variable "bucketname" {}
